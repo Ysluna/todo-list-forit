@@ -53,14 +53,11 @@ export default function HomePage() {
     if (!newTitle.trim()) return;
 
     setSaving(true);
-    fetch(
-      "https://bf1e1d2b-8cce-4419-823b-3162c6822431-00-fsbd5chfcm8s.worf.replit.dev/tasks",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: newTitle.trim() }),
-      },
-    )
+    fetch(BACKEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newTitle.trim() }),
+    })
       .then((res) => res.json())
       .then(() => {
         setNewTitle("");
@@ -131,126 +128,185 @@ export default function HomePage() {
     return 0;
   });
 
+  // EDICION
+
   return (
-    <main className="p-4 max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Lista de tareas</h1>
+    <main className="p-6 max-w-md mx-auto bg-white min-h-screen mt-40">
+      <h1 className="text-3xl font-bold mb-8 text-center text-[#1a183e]">
+        Lista de tareas
+      </h1>
 
-      <div className="flex flex-col md:flex-row gap-4 mb-6 ">
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as any)}
-          className="border rounded px-3 py-2"
-        >
-          <option value="all">Todas</option>
-          <option value="completed">Completadas</option>
-          <option value="incomplete">Incompletas</option>
-        </select>
+      {/* Filtros */}
+      <div className="flex flex-col sm:flex-row gap-8 justify-center mb-8">
+        {/* Filtro por estado */}
+        <div className="flex flex-col w-full max-w-[200px]">
+          <button
+            onClick={() => setFilter("all")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              filter === "all"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Todas
+          </button>
+          <button
+            onClick={() => setFilter("completed")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              filter === "completed"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Completadas
+          </button>
+          <button
+            onClick={() => setFilter("incomplete")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              filter === "incomplete"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Incompletas
+          </button>
+        </div>
 
-        <select
-          value={order}
-          onChange={(e) => setOrder(e.target.value as any)}
-          className="border rounded px-3 py-2"
-        >
-          <option value="newest">Más nuevas</option>
-          <option value="oldest">Más viejas</option>
-          <option value="az">A-Z</option>
-          <option value="za">Z-A</option>
-        </select>
+        {/* Filtro por orden */}
+        <div className="flex flex-col w-full max-w-[200px]">
+          <button
+            onClick={() => setOrder("newest")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              order === "newest"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Más nuevas
+          </button>
+          <button
+            onClick={() => setOrder("oldest")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              order === "oldest"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Más antiguas
+          </button>
+          <button
+            onClick={() => setOrder("az")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              order === "az"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            A - Z
+          </button>
+          <button
+            onClick={() => setOrder("za")}
+            className={`py-3 px-4 text-left transition-all border-l-4 ${
+              order === "za"
+                ? "border-[#6072fe] bg-white text-[#6072fe] font-semibold"
+                : "border-transparent hover:bg-gray-100 text-gray-600"
+            }`}
+          >
+            Z - A
+          </button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="mb-6 flex gap-2">
+      {/* Formulario */}
+      <form onSubmit={handleSubmit} className="flex gap-2 mb-8">
         <input
           type="text"
-          placeholder="Nueva tarea"
-          className="flex-grow border rounded px-3 py-2"
+          placeholder="Nueva tarea..."
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
-          disabled={saving}
+          className="flex-1 px-4 py-2 bg-gray-100 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#6072fe]"
         />
         <button
           type="submit"
-          disabled={saving || !newTitle.trim()}
-          className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          disabled={saving}
+          className="px-4 py-2 bg-[#6072fe] text-white rounded-2xl hover:bg-[#4051d7] transition"
         >
-          {saving ? "Guardando..." : "Agregar"}
+          Agregar
         </button>
       </form>
 
-      {tasks.length === 0 ? (
-        <p className="text-gray-500">No hay tareas.</p>
-      ) : (
-        <ul>
-          {orderedTasks.map((task) => (
-            <li
-              key={task.id}
-              className={`mb-3 p-3 rounded border flex items-center gap-3 justify-between ${
-                task.completed ? "bg-green-100" : "bg-gray-100"
-              }`}
-            >
-              <div className="flex items-center gap-3 flex-grow">
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => toggleCompleted(task)}
-                  className="w-5 h-5"
-                />
-
-                {editingId === task.id ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editingTitle}
-                      onChange={(e) => setEditingTitle(e.target.value)}
-                      className="flex-grow border rounded px-2 py-1"
-                    />
-                    <button
-                      onClick={() => saveEditing(task.id)}
-                      className="bg-green-500 text-white px-3 py-1 rounded ml-2"
-                    >
-                      Guardar
-                    </button>
-                    <button
-                      onClick={cancelEditing}
-                      className="bg-gray-400 text-white px-3 py-1 rounded ml-2"
-                    >
-                      Cancelar
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span
-                      className={`flex-grow ${
-                        task.completed ? "line-through text-green-700" : ""
-                      }`}
-                    >
-                      {task.title}
-                    </span>
-                    <button
-                      onClick={() => startEditing(task)}
-                      className="text-blue-600 px-3 py-1 rounded hover:bg-blue-100"
-                    >
-                      Editar
-                    </button>
-                  </>
-                )}
-              </div>
-
-              <button
-                onClick={() => deleteTask(task.id)}
-                className="text-red-600 font-bold px-2 py-1 rounded hover:bg-red-100"
-                aria-label={`Borrar tarea ${task.title}`}
-              >
-                X
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Mensaje */}
       {message && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded shadow-lg z-50">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-[#353239] text-white px-4 py-2 rounded shadow-lg z-50">
           {message}
         </div>
       )}
+
+      {/* Lista de tareas */}
+      <ul className="space-y-4">
+        {orderedTasks.map((task) => (
+          <li
+            key={task.id}
+            className={`rounded-xl px-5 py-4 transition-all font-bold ${
+              editingId === task.id ? "bg-[#eef0fd]" : "bg-[#f5f5f5]"
+            }`}
+          >
+            {editingId === task.id ? (
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <input
+                  type="text"
+                  value={editingTitle}
+                  onChange={(e) => setEditingTitle(e.target.value)}
+                  className="flex-1 px-3 py-2"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    onClick={() => saveEditing(task.id)}
+                    className="px-3 py-1"
+                  >
+                    ✔️
+                  </button>
+                  <button onClick={cancelEditing} className="px-3 py-1 ">
+                    ❌
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-3">
+                <label className="flex items-center gap-2 flex-1">
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleCompleted(task)}
+                    className="appearance-none h-5 w-5 rounded-full border-2 border-[#6072fe] checked:bg-gray-100 checked:border-gray-300 transition-all cursor-pointer"
+                  />
+                  <span
+                    className={`${
+                      task.completed ? "line-through text-gray-400" : ""
+                    }`}
+                  >
+                    {task.title}
+                  </span>
+                </label>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => startEditing(task)}
+                    className="text-sm "
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => deleteTask(task.id)}
+                    className="text-sm"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
