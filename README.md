@@ -1,21 +1,30 @@
 # Todo List ForIT
 
-Aplicación básica de lista de tareas creada como challenge para ingreso a la Academia ForIT 2025.
+¡Hola! Soy Yamila
+Hice una aplicación de lista de tareas para el challenge de ingreso a la Academia ForIT 2025.
+
+Imagenes del servidor corriendo:
+
+<img width="1919" height="1079" alt="Captura de pantalla 2025-08-06 120848" src="https://github.com/user-attachments/assets/137e1ee7-4dfb-4b8b-9384-12b8e143856b" />
+<img width="1919" height="1079" alt="Captura de pantalla 2025-08-06 120925" src="https://github.com/user-attachments/assets/d9c864a4-92f3-432e-b5e8-82c43d80ff15" />
+<img width="1919" height="1079" alt="Captura de pantalla 2025-08-06 121028" src="https://github.com/user-attachments/assets/9979e6ea-00a5-4613-8212-790aa3ec553d" />
+
+Fue todo un desafío para mi porque no pude usar mi computadora y tuve que hacerlo con la computadora de mi trabajo, la cual no puedo instalar nada, así que pensé, investigué y busqué la forma de completar el desafío. Lo que se me ocurrió fue usar un editor de código en internet, en este caso usé REPLIT, y tras varios intentos pude hacer la aplicación y subirla a mi github.
 
 ---
 
-## Descripción
+# Descripción
 
 Esta aplicación permite gestionar tareas básicas: crear, leer, actualizar y eliminar (CRUD).  
 Está desarrollada con React (Next.js con `use client`), usando hooks para el manejo de estado, y un backend básico en Express (con almacenamiento en memoria).
 
-Cumple con los requisitos del challenge, incluyendo:
+Alguno de los requisitos+bonus hechos son:
 
 - API REST con Express y endpoints para CRUD de tareas.
 - Frontend con React usando Vite/Next.js.
 - Uso de fetch para llamadas a la API.
-- Filtrado y ordenación de tareas.
-- Estilos simples con Tailwind CSS.
+- Filtrado y orden de tareas.
+- Estilos personales y modernos con Tailwind CSS.
 - Manejo básico de errores y estado de carga.
 - Uso de TypeScript en frontend y backend.
 
@@ -25,8 +34,8 @@ Cumple con los requisitos del challenge, incluyendo:
 
 - React 18 / Next.js 13 (app router)
 - TypeScript
-- Express.js (backend)
-- Tailwind CSS (estilos)
+- Express.js
+- Tailwind CSS
 - Fetch API para comunicación frontend-backend
 - Git para control de versiones
 
@@ -72,10 +81,10 @@ Estructura del proyecto
 bash
 Copiar
 Editar
-/backend       # Servidor Express con API REST
-/frontend      # Aplicación React (Next.js)
-/frontend/src/components  # Componentes React separados (opcional)
+/backend
+/frontend
 Endpoints disponibles
+
 GET /api/tasks - Obtener todas las tareas
 
 POST /api/tasks - Crear una tarea nueva { title: string }
@@ -84,7 +93,7 @@ PUT /api/tasks/:id - Actualizar una tarea { title?, completed? }
 
 DELETE /api/tasks/:id - Eliminar una tarea
 
-Funcionalidades
+## Funcionalidades
 Crear, editar, eliminar tareas
 
 Marcar tareas como completadas
@@ -95,12 +104,7 @@ Ordenar tareas por fecha o alfabéticamente
 
 Manejo básico de estado de carga y errores
 
-Consideraciones
-El backend usa un array en memoria para almacenar las tareas (no persistente)
-
-Ideal para aprender y demostrar conceptos básicos en React y Node.js
-
-Código desarrollado sin uso de AI para demostrar conocimientos personales
+Uso de SQLite3 para el almacenamiento
 
 Autor
 Yamila Luna
