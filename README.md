@@ -11,6 +11,8 @@ Imagenes del servidor corriendo:
 
 Fue todo un desafío para mi porque no pude usar mi computadora y tuve que hacerlo con la computadora de mi trabajo, la cual no puedo instalar nada, así que pensé, investigué y busqué la forma de completar el desafío. Lo que se me ocurrió fue usar un editor de código en internet, en este caso usé REPLIT, y tras varios intentos pude hacer la aplicación y subirla a mi github.
 
+Personalmente quise demostrar mi conocimiento haciendo un proyecto con Nest+Next, ya que nest fue la última tecnología aprendida y como acababa de hacer un proyecto con nest quise aprovechar la oportunidad. Aun le quedan varias cosas por pulir, por ejemplo, separar los componentes del react para un mejor escalado, que a su vez es una buena practica para mantener el órden en el código, también me hubiese gustado poner más funcionalidades como poder registrarse y archivar tareas, o inspirarme más a la hora de hacer el diseño ux/ui, pero por cuestiones de tiempo no pude avanzar más.
+
 ---
 
 # Descripción
@@ -38,6 +40,31 @@ Alguno de los requisitos+bonus hechos son:
 - Tailwind CSS
 - Fetch API para comunicación frontend-backend
 - Git para control de versiones
+
+Endpoints disponibles
+
+GET /api/tasks - Obtener todas las tareas
+
+POST /api/tasks - Crear una tarea nueva { title: string }
+
+PUT /api/tasks/:id - Actualizar una tarea { title?, completed? }
+
+DELETE /api/tasks/:id - Eliminar una tarea
+
+---
+
+## Funcionalidades
+Crear, editar, eliminar tareas
+
+Marcar tareas como completadas
+
+Filtrar tareas (todas, completadas, incompletas)
+
+Ordenar tareas por fecha o alfabéticamente
+
+Manejo básico de estado de carga y errores
+
+Uso de SQLite3 para el almacenamiento
 
 ---
 
@@ -83,28 +110,8 @@ Copiar
 Editar
 /backend
 /frontend
-Endpoints disponibles
 
-GET /api/tasks - Obtener todas las tareas
-
-POST /api/tasks - Crear una tarea nueva { title: string }
-
-PUT /api/tasks/:id - Actualizar una tarea { title?, completed? }
-
-DELETE /api/tasks/:id - Eliminar una tarea
-
-## Funcionalidades
-Crear, editar, eliminar tareas
-
-Marcar tareas como completadas
-
-Filtrar tareas (todas, completadas, incompletas)
-
-Ordenar tareas por fecha o alfabéticamente
-
-Manejo básico de estado de carga y errores
-
-Uso de SQLite3 para el almacenamiento
+-------------------------
 
 Autor
 Yamila Luna
