@@ -257,7 +257,7 @@ export default function HomePage() {
                   type="text"
                   value={editingTitle}
                   onChange={(e) => setEditingTitle(e.target.value)}
-                  className="flex-1 px-3 py-2"
+                  className="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:outline-none px-3 py-2"
                 />
                 <div className="flex gap-2 justify-end">
                   <button
